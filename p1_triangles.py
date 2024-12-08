@@ -26,19 +26,16 @@ Alg:
 '''
 class Triangle:
     def __init__(self, s1, s2, s3):
-        self.s1 = s1
-        self.s2 = s2
-        self.s3 = s3
+        self._sides = (s1, s2, s3)
         self._validate_triangle()
     
     @property
     def kind(self):
         def is_equilateral():
-            return self.s1 == self.s2 == self.s3
+            return len(set(self._sides)) == 1
         
         def is_scalene():
-            return len({self.s1, self.s2, self.s3}) == 3
-        
+            return len(set(self._sides)) == 3
         
         if is_equilateral():
             return 'equilateral'
@@ -49,17 +46,16 @@ class Triangle:
         return 'isosceles'
     
     def _validate_triangle(self):
-        SIDES = [self.s1, self.s2, self.s3]
         def validate_sides():
-            for side in SIDES:
+            for side in self._sides:
                 if type(side) not in [int, float]:
                     raise TypeError("Sides must be numbers")
                 if side <= 0:
                     raise ValueError('Sides must be greater than 0')
                 
         def validate_side_combo():
-            for side in SIDES:
-                without_side = SIDES.copy()
+            for side in self._sides:
+                without_side = list(self._sides)
                 without_side.remove(side)
                 if side >= sum(without_side):
                     raise ValueError('Sum of any 2 sides should be greater than 3rd side')
