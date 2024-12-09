@@ -26,7 +26,7 @@ class RomanNumeral:
             multiplier, remainder = divmod(current_decimal_value, value)
             # if multiplier > 0:
             #     roman += key * multiplier
-            roman += key * multiplier
+            roman += key * multiplier   # i removed the if statement bc multiplying by 0 should handle the cases where it won't work
             current_decimal_value = remainder
 
         return roman
