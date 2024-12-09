@@ -11,7 +11,7 @@ input: make a DNA class that passes the tests
 
 rules:
     - make a DNA class
-        - iv: 
+        - iv's: 
             - stand is a string
         - methods:
             - hamming_distance(string_of_other_strand)
@@ -19,7 +19,7 @@ rules:
 
 
 DS:
-    - 
+    - strings
 
 Alg:
     - 
@@ -30,4 +30,18 @@ class DNA:
         self.strand = strand
 
     def hamming_distance(self, other):
-        pass
+        count = 0
+
+        if len(self.strand) <= len(other):
+            shorter = self.strand
+            longer = other
+        else:
+            shorter = other
+            longer = self.strand
+        
+        for idx, char in enumerate(shorter):
+            if char != longer[idx]:
+                count += 1
+
+        return count
+
