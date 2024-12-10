@@ -58,25 +58,25 @@ class Diamond:
     def _build_top_half(cls, middle_letter):
         outer_spaces = cls.ALPHABET.index(middle_letter)
         inner_spaces = 1
-        result = []
+        top_half = []
 
         for letter in cls.ALPHABET:
-            if not result:
+            if letter == 'A':
                 line = ' ' * outer_spaces + letter + ' ' * outer_spaces + '\n'
             else:
                 line = ' ' * outer_spaces + letter + ' ' * inner_spaces + letter + ' ' * outer_spaces + '\n'
                 inner_spaces += 2
 
-            result.append(line)
+            top_half.append(line)
             outer_spaces -= 1
 
             if letter == middle_letter:
-                return result
+                return top_half
             
     @classmethod
-    def _build_bottom_half(cls, result):
-        return result[:-1][::-1]
+    def _build_bottom_half(cls, top_half):
+        return top_half[:-1][::-1]
 
 
 if __name__ == '__main__':
-    print(Diamond.make_diamond('B'))
+    print(Diamond.make_diamond('C'))
